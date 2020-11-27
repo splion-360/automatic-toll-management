@@ -1,11 +1,11 @@
 import os
 import cv2
-pathOut = '/home/vigneshdesmond/Desktop/video2frames'
+pathOut = r'/home/vigneshdesmond/Desktop/video2frames'
 count = 0
 counter = 1
-listing = os.listdir('/home/vigneshdesmond/Desktop/videos')
+listing = os.listdir(r'/home/vigneshdesmond/Desktop/videos')
 for vid in listing:
-    vid = r"C:/Users/Me/videos/train/"+vid
+    vid = r'/home/vigneshdesmond/Desktop/videos/'+vid
     cap = cv2.VideoCapture(vid)
     count = 0
     counter += 1
@@ -13,6 +13,6 @@ for vid in listing:
     while success:
         success,image = cap.read()
         print('Read a new frame:',success)
-        if count%30 == 0 :
+        if count%10 == 0 :
              cv2.imwrite(pathOut + 'video%d'%counter + 'frame%d.jpg'%count ,image)
         count+=1
