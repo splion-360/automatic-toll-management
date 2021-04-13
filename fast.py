@@ -8,6 +8,7 @@ import re
 import subprocess
 from pydantic import BaseModel
 import uvicorn
+import pytesseract
 
 app = FastAPI()
 class ImageType(BaseModel):
@@ -38,8 +39,12 @@ def prediction(request: Request, file: bytes = File(...)):
             if i.startswith("LP"):
                 strs = re.findall('\d+', i)
                 vals = list(map(int, strs))
-                result_json[obj_id] = [{"lp_conf":vals[0], "left_x":vals[1], "left_y":vals[2], "width":vals[3], "height":vals[4]}]
+                x,y,w,h = vals[1:]
+                crop_img = frame[y:y + h, x:x + w]
+                text = pytesseract.image_to_string(crop_img)
+                result_json[obj_id] = [{"lp_conf":vals[0], "left_x":vals[1], "left_y":vals[2], "width":vals[3], "height":vals[4], "text":text}]
                 obj_id +=1
+
         return result_json
     return "No post request found"
 

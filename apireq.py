@@ -23,7 +23,7 @@ else:
 fastapi_post_url = f"http://{ip_address}:8080/predict"
 
 # POSTING LOCAL IMAGE
-imgResp=urllib.request.urlopen('file:' + r"C:\Users\vigne\Downloads\testimages\ezgif-frame-084.jpg") # IMAGE PATH HERE
+imgResp=urllib.request.urlopen('file:' + r"C:\Users\vigne\Desktop\automatic-toll-management\test_images\2.jpg") # IMAGE PATH HERE
 imgNp=np.array(bytearray(imgResp.read()),dtype=np.uint8)
 start = time.time()
 try:
