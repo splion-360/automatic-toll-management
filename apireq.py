@@ -1,3 +1,4 @@
+#-- coding: utf-8 --
 import os
 import urllib.request
 import requests
@@ -22,8 +23,8 @@ else:
 fastapi_post_url = f"http://{ip_address}:8080/predict"
 
 # POSTING LOCAL IMAGE
-imgResp=urllib.request.urlopen('file:' + r'‪C:\Users\vigne\Downloads\ezgif-frame-001.jpg')
-imgNp=np.array(bytearray(imgResp.read()),dtype=np.uint8) 
+imgResp=urllib.request.urlopen('file:' + r"C:\Users\vigne\Downloads\testimages\ezgif-frame-084.jpg") # IMAGE PATH HERE
+imgNp=np.array(bytearray(imgResp.read()),dtype=np.uint8)
 start = time.time()
 try:
     r = requests.post(fastapi_post_url,files={'file':imgNp})
@@ -32,5 +33,6 @@ except Exception as e:
     pass
     print("Error: ",e)
     result=None
+
 print(result)
 print("Response time: ", time.time() - start)
